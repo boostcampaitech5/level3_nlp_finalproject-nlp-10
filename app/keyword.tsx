@@ -25,7 +25,7 @@ export default function Keyword() {
       </form>
       <div className="flex flex-col w-full h-auto min-w-[400px] max-w-[600px] mx-auto min-h-[600px] mt-10 bg-blue-100">
         {movieList.map((movie : IMovie) => {
-          return <Movie key={movie.id} title={movie.title} poster={movie.poster} keyword={movie.keyword}/>
+          return <Movie key={movie.id} id={movie.id} title={movie.title} poster={movie.poster} keyword={movie.keyword}/>
         })
       }
       </div>
@@ -40,21 +40,24 @@ const onSubmit = (setMovieList : any) => {
         "id": "1",
         "title": "어벤져스",
         "poster": "https://an2-img.amz.wtchn.net/image/v2/IRi6m4d3B8qOiO8Ue-VG7w.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk9EYzRNamt6TURBM016QTVNRE0wT0RJaWZRLmdrQU1rdjJlUGFsMUdlOU9YTFVDYzRHSkdMQjBkZ3FBNlVaWVBzVU41UlU",
-        "keyword": ["액션", "어벤져스", "히어로"]
+        "keyword": ["액션", "어벤져스", "히어로", "마블", "토니스타크"]
       }
     setMovieList([res,res,res,res,res])
   }
 }
 
-const Movie = (props: { title: string, poster: string, keyword: string[] }) => {
+const Movie = (props: { id:string, title: string, poster: string, keyword: string[] }) => {
   return (
-    <div className="flex h-64 w-full justify-around bg-red-100">
-      <div className="flex justify-center py-5">
+    <div className="flex h-64 justify-between rounded bg-slate-50 m-3">
+      <div className="flex pl-6 py-5">
         <img src={props.poster} alt={props.title} className=""/>
       </div>
-      <div className="flex flex-col py-10 justify-center">
-        <h1>{props.title}</h1>
-        
+      <div className="flex flex-col w-full py-10 align-middle">
+        <div className='flex mx-auto text-lg'>{props.title}</div>
+        <div className='flex flex-wrap justify-center mt-5'>{props.keyword.map((keyword : string) => {
+          return (<div key={props.id + keyword} className='rounded-lg bg-red-200 py-1 px-2 mx-2 my-1 text-sm'>{keyword}</div>)
+        })}
+        </div>
       </div>
     </div>
   )

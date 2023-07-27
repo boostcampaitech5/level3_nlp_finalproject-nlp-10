@@ -3,7 +3,7 @@ import Keyword from "./keyword"
 export default function Home() {
   return (
     <div className="flex min-h-screen min-w-[700px]">
-      <aside className="flex w-full  max-h-screen fixed">
+      <aside className="flex w-full  max-h-screen absolute">
         <div className="flex w-full justify-center">
           <PanelButton>
             <span>키워드 기반 영화 추천</span>
