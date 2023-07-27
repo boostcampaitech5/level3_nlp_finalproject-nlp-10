@@ -19,15 +19,14 @@ export default function Keyword() {
   const {register, handleSubmit} = useForm<IFormInput>()
   const [movieList, setMovieList] = useState([])
   return (
-    <div className="flex flex-col justify-center min-h-screen w-full bg-green-100">
+    <div className="flex flex-col justify-center min-h-screen w-full bg-neutral-100">
       <form onSubmit={handleSubmit(onSubmit(setMovieList))}>
         <input {...register("userInput")} type="text" placeholder='원하는 키워드를 입력해보세요. ex) 액션, 코믹' name="userInput" className="mt-60 flex mx-auto w-96 h-10 px-3 rounded-lg bg-gray-100 shadow-md"/>
       </form>
       <div className="flex flex-col w-full h-auto min-w-[400px] max-w-[600px] mx-auto min-h-[600px] mt-10 bg-blue-100">
-        {movieList.map((movie : IMovie) => {
+        {movieList.length != 0 ? movieList.map((movie : IMovie) => {
           return <Movie key={movie.id} id={movie.id} title={movie.title} poster={movie.poster} keyword={movie.keyword}/>
-        })
-      }
+        }) : <div className="flex justify-center my-auto text-gray-500 text-2xl">키워드를 입력해 원하는 영화를 검색해보세요.</div> }
       </div>
     </div>
   )
