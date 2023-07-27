@@ -1,3 +1,5 @@
+import './globals.css'
+
 export const metadata = {
   title: '키워드 기반 영화 추천',
   description: '원하는 영화를 찾아드립니다.',
