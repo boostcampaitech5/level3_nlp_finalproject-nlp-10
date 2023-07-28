@@ -8,11 +8,22 @@ type IFormInput = {
   userInput: string
 }
 
+type IFetchRes = {
+  title: string,
+  movie_code: string,
+  img_url: string,
+  keywords: string,
+}
+
 type IMovie = {
   id: string,
   title: string,
   poster: string,
-  keyword: string[]
+  keyword: string[],
+  score?: number,
+  positive?: number,
+  negative?: number,
+  neutral?: number,
 }
 
 export default function Keyword() {
@@ -34,14 +45,34 @@ export default function Keyword() {
 
 const onSubmit = (setMovieList : any) => {
   return async (data : IFormInput) => {
+    const url = encodeURI("api_1?keyword=" + data.userInput)
+
     // fetch
-    const res = {
-        "id": "1",
-        "title": "어벤져스",
-        "poster": "https://an2-img.amz.wtchn.net/image/v2/IRi6m4d3B8qOiO8Ue-VG7w.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk5Ea3dlRGN3TUhFNE1DSmRMQ0p3SWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk9EYzRNamt6TURBM016QTVNRE0wT0RJaWZRLmdrQU1rdjJlUGFsMUdlOU9YTFVDYzRHSkdMQjBkZ3FBNlVaWVBzVU41UlU",
-        "keyword": ["액션", "어벤져스", "히어로", "마블", "토니스타크"]
+    const res = await fetch(url).then(res => res.json()).catch(err => console.log(err))
+    // make movie list
+    let arr = []
+    const entry : any = Object.entries(res)
+    for (const [key, movie] of entry) {
+      const elem = {
+        id: movie.movie_code,
+        score: key,
+        title: movie.title,
+        poster: movie.img_url,
+        keyword: movie.keywords.split(' '),
       }
-    setMovieList([res,res,res,res,res])
+      arr.push(elem)
+    }
+
+    // get more data with movie id
+    const res2 = {
+      "id": "1",
+      "positive" : 100,
+      "negative" : 30,
+      "neutral" : 50,
+    }
+
+    // combine
+    setMovieList(arr)
   }
 }
 
