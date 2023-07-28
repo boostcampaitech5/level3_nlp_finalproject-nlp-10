@@ -79,8 +79,10 @@ const onSubmit = (setMovieList : any) => {
 const Movie = (props: { id:string, title: string, poster: string, keyword: string[] }) => {
   return (
     <div className="flex h-64 justify-between rounded bg-slate-50 m-3">
-      <div className="flex pl-6 py-5">
+      <div className="flex">
+        <a className="flex pl-6 py-5"href={`https://pedia.watcha.com/ko-KR/contents/${props.id}`}>
         <img src={props.poster} alt={props.title} className=""/>
+        </a>
       </div>
       <div className="flex flex-col w-full py-10 align-middle">
         <div className='flex mx-auto text-lg'>{props.title}</div>
