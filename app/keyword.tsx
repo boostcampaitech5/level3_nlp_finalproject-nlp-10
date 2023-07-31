@@ -53,7 +53,7 @@ const onSubmit = (setMovieList : any) => {
     let arr = []
     const entry : any = Object.entries(res)
     for (const [key, movie] of entry) {
-      const elem = {
+      const elem : any = {
         id: movie.movie_code,
         score: key,
         title: movie.title,
@@ -63,27 +63,34 @@ const onSubmit = (setMovieList : any) => {
       arr.push(elem)
     }
 
-    // get more data with movie id
-    const res2 = {
-      "id": "1",
-      "positive" : 100,
-      "negative" : 30,
-      "neutral" : 50,
-    }
+    // for (const movie of arr) {
+    //   const url_2 = encodeURI("api_3?id=" + movie.id)
+    //   const res2 = await fetch(url_2).then(res => res.json()).catch(err => console.log(err))
+    //     movie.positive = res2.positive
+    //     movie.negative = res2.negative
+    //     movie.neutral = res2.neutral
+    // }
+
+    // console.log(arr)
 
     // combine
     setMovieList(arr)
   }
 }
 
-const Movie = (props: { id:string, title: string, poster: string, keyword: string[] }) => {
+const Movie = (props: { id:string, title: string, poster: string, keyword: string[], positive?:number, negetive?:number, neutrial?:number }) => {
   return (
     <div className="flex h-64 justify-between rounded bg-slate-50 m-3">
       <div className="flex">
-        <a className="flex pl-6 py-5"href={`https://pedia.watcha.com/ko-KR/contents/${props.id}`}>
+        <a className="flex pl-6 py-5" href={`https://pedia.watcha.com/ko-KR/contents/${props.id}`} >
         <img src={props.poster} alt={props.title} className=""/>
         </a>
       </div>
+      {/* <div className='flex flex-col space-y-2 w-32 my-auto justify-center'>
+        <div className='flex'><span>{`긍정 ${props.positive ? props.positive : null}`}</span></div>
+        <div className='flex'><span>{`중립 ${props.neutrial ? props.neutrial : null}`}</span></div>
+        <div className='flex'><span>{`부정 ${props.negetive ? props.negetive : null}`}</span></div>
+      </div> */}
       <div className="flex flex-col w-full py-10 align-middle">
         <div className='flex mx-auto text-lg'>{props.title}</div>
         <div className='flex flex-wrap justify-center mt-5'>{props.keyword.map((keyword : string) => {
