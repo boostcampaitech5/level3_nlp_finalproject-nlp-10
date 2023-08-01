@@ -46,9 +46,11 @@ export default function Keyword() {
 const onSubmit = (setMovieList : any) => {
   return async (data : IFormInput) => {
     const url = encodeURI("api_1?keyword=" + data.userInput)
+    // const url = encodeURI(data.userInput)
 
     // fetch
     const res = await fetch(url).then(res => res.json()).catch(err => console.log(err))
+    // const res = await fetch("http://34.64.212.49:8001/rec?keyword="+url).then(res => res.json()).catch(err => console.log(err))
     // make movie list
     let arr = []
     const entry : any = Object.entries(res)

@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: '/api_1/:path*',
-        destination: 'http://34.64.212.49:8001/rec/:path*',
+        destination: 'http://34.64.212.49:8001/rec:path*',
       },
       {
         source: '/api_2/:path*',
